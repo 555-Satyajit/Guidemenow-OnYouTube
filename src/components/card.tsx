@@ -17,7 +17,7 @@ type Item = {
   created_at: string;
 };
 
-export function ArticlesCardsGrid({ guides }: { guides: Guide[] }) {
+export function ArticlesCardsGrid({ }: { guides: Guide[] }) {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   
