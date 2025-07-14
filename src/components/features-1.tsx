@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { ArrowRight} from 'lucide-react'
-import { ReactNode } from 'react'
 import { Button } from './ui/button'
 import { useRouter } from 'next/navigation'
 

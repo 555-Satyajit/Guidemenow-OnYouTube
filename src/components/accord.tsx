@@ -22,7 +22,7 @@ export function AccordionDemo() {
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionTrigger> Can I use these tools even if I'm just a beginner?</AccordionTrigger>
+        <AccordionTrigger> Can I use these tools even if I&apos;m just a beginner?</AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-balance">
           <p>
            Absolutely. Every tool here is beginner-friendly. Most have free trials or free plans, so you can try them without risk.
