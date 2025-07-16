@@ -1,5 +1,3 @@
-'use client'
-
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -7,9 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import '@mantine/core/styles.css';
 import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
 import HEADER from "@/components/header";
-
-import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import ClientLayout from "./client-layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,7 +17,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const metadata: Metadata = {
+export const metadata: Metadata = {
   title: "Creator Toolbox: Guides & Tools for YouTube, SEO & Digital Products",
   description: "Discover expert guides, tools, and strategies to grow on YouTube, master SEO, and sell digital products. Perfect for creators & online entrepreneurs.",
   keywords: ["YouTube guides", "SEO strategies", "digital products", "content creation", "creator tools"],
@@ -58,28 +54,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname()
-  const [displayChildren, setDisplayChildren] = useState(children)
-  const [transitionStage, setTransitionStage] = useState("fadeIn")
-  const [currentPath, setCurrentPath] = useState(pathname)
-
-  useEffect(() => {
-    if (pathname !== currentPath) {
-      setTransitionStage("fadeOut")
-    }
-  }, [pathname, currentPath])
-
-  useEffect(() => {
-    if (transitionStage === "fadeOut") {
-      const timeout = setTimeout(() => {
-        setDisplayChildren(children)
-        setTransitionStage("fadeIn")
-        setCurrentPath(pathname)
-      }, 300)
-      return () => clearTimeout(timeout)
-    }
-  }, [transitionStage, children, pathname])
-
   return (
     <html lang="en" {...mantineHtmlProps}>
       <head>
@@ -99,9 +73,7 @@ export default function RootLayout({
           <MantineProvider>
             <main className="min-h-screen bg-background" style={{ color: 'white' }}>
               <HEADER />
-              <div className={`fade-wrapper ${transitionStage}`}>
-                {displayChildren}
-              </div>
+              <ClientLayout>{children}</ClientLayout>
             </main>
           </MantineProvider>
         </ThemeProvider>
